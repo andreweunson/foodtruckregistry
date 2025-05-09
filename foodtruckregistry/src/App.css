@@ -1,0 +1,36 @@
+body,
+#root {
+  display: flex;
+  margin: 0;
+  height: 100vh;
+  width: 100%;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 20vw;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  height: 50vw;
+}
+
+input {
+  display: flex;
+  flex-direction: column;
+  height: 20px;
+  width: 20rem;
+}
+
+span {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 1rem;
+}
