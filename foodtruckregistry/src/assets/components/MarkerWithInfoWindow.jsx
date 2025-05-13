@@ -5,8 +5,9 @@ import {
   useAdvancedMarkerRef,
 } from "@vis.gl/react-google-maps";
 
+//TODO: add a custom HTML element that gets displayed when the advancedmarker is clicked
 function MarkerWithInfoWindow({ points }) {
-  const [infoWindowShown, setInfoWindowShown] = useState(false);
+  //const [infoWindowShown, setInfoWindowShown] = useState(false);
   const map = useMap();
   console.log("Rendered the marker component");
   console.log("Current markers:", points);
@@ -15,13 +16,13 @@ function MarkerWithInfoWindow({ points }) {
     if (!map) return;
     if (!ev.latLng) return;
     console.log("Marker clicked:", ev.latLng.toString());
-    setInfoWindowShown((infoWindowShown) => !infoWindowShown);
+    //setInfoWindowShown((infoWindowShown) => !infoWindowShown);
     map.panTo(ev.latLng);
   });
 
-  const handleClose = useCallback(() => {
-    setInfoWindowShown(false);
-  });
+  // const handleClose = useCallback(() => {
+  //   setInfoWindowShown(false);
+  // });
 
   return (
     <>

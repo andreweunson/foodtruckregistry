@@ -4,6 +4,7 @@ import AddTruckForm from "./assets/components/AddTruckForm";
 import DeleteForm from "./assets/components/DeleteFoodTruckForm";
 import MarkerWithInfoWindow from "./assets/components/MarkerWithInfoWindow";
 import "./App.css";
+const API_KEY = import.meta.env.VITE_FOOD_TRUCK_MAPS_API;
 
 function App() {
   const [foodTruckUsers, setFoodTruckUsers] = useState([]);
@@ -12,7 +13,7 @@ function App() {
   return (
     <>
       <APIProvider
-        apiKey={"AIzaSyCNLcBN2PLcM29X4oxYL4op7pLhNc4U0jk"}
+        apiKey={API_KEY}
         onLoad={() => console.log("Maps API has loaded.")}
       >
         <Map

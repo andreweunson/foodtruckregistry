@@ -7,6 +7,13 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
+    proxy: {
+      "/apis": {
+        target: "https://places.googleapis.com/v1/places:autocomplete",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/apis/, ""),
+      },
+    },
   },
   plugins: [react()],
 });

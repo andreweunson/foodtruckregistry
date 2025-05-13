@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PlacesAutocomplete from "./PlacesAutocomplete";
 
 function AddTruckForm({ props }) {
   const setTruckUser = props;
@@ -12,6 +13,9 @@ function AddTruckForm({ props }) {
   });
   console.log(foodTruck);
 
+  //TODO: change location selection from latitude longitude to a simple text input box
+  //that uses the Places API to autocomplete or suggest a location
+
   //Updates the state of the food truck name
   const handleChange = (e) => {
     setFoodTruck((prev) => ({
@@ -21,15 +25,15 @@ function AddTruckForm({ props }) {
   };
 
   //Updates the state of the food truck location
-  const handleLocChange = (e) => {
-    setFoodTruck((prev) => ({
-      ...prev,
-      location: {
-        ...prev.location,
-        [e.target.name]: parseFloat(e.target.value),
-      },
-    }));
-  };
+  // const handleLocChange = (e) => {
+  //   setFoodTruck((prev) => ({
+  //     ...prev,
+  //     location: {
+  //       ...prev.location,
+  //       [e.target.name]: parseFloat(e.target.value),
+  //     },
+  //   }));
+  // };
 
   //When the form is submitted, takes the foodTruck object and stores it into the
   //truckUser array, then clears the input values for a new truck
@@ -54,23 +58,10 @@ function AddTruckForm({ props }) {
         type="text"
         name="name"
         value={foodTruck.name}
-        placeholder="Enter your business name"
+        placeholder="Enter your business's name"
         onChange={handleChange}
       />
-      <input
-        type="text"
-        name="lat"
-        value={foodTruck.location.lat}
-        placeholder="Enter your trucks latitude"
-        onChange={handleLocChange}
-      />
-      <input
-        type="text"
-        name="lng"
-        value={foodTruck.location.lng}
-        placeholder="Enter your trucks longitude"
-        onChange={handleLocChange}
-      />
+      <PlacesAutocomplete />
       <input type="submit" value="Submit Location" />
     </form>
   );
