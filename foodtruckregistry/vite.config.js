@@ -8,10 +8,10 @@ export default defineConfig({
       usePolling: true,
     },
     proxy: {
-      "/apis": {
+      "/api": {
         target: "https://places.googleapis.com/v1/places:autocomplete",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/apis/, ""),
+        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },

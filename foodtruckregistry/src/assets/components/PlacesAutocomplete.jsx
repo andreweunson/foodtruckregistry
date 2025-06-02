@@ -1,5 +1,5 @@
 import { useActionState, useEffect, useState } from "react";
-import getPlacesSuggestion from "./services/PlacesAutocomplete";
+import getPlacesSuggestion from "../services/PlacesAutocomplete";
 
 export default function PlacesAutocomplete() {
   /**
@@ -24,10 +24,10 @@ export default function PlacesAutocomplete() {
   //to get new suggestions
   useEffect(() => {
     if (!incompletePlace) return;
-    const suggestions = getPlacesSuggestion(incompletePlace);
-    console.log(suggestions);
-    if (!suggestions) return;
-    setPlaceAutocomplete(suggestions);
+    getPlacesSuggestion(incompletePlace.string).then((suggestions) =>
+      setPlaceAutocomplete(suggestions)
+    );
+    console.log("Autocomplete:", placeAutocomplete);
   }, [incompletePlace]);
 
   const handleAutocompleteChange = (event) => {
