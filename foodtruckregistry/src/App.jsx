@@ -31,7 +31,7 @@ function App() {
         >
           <MarkerWithInfoWindow points={foodTruckUsers} />
         </Map>
-        <div class="flex-container">
+        <div className="flex-container">
           <AddTruckForm props={setFoodTruckUsers} />
           <DeleteForm props={[foodTruckUsers, setFoodTruckUsers]} />
         </div>
