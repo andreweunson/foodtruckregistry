@@ -8,7 +8,7 @@ import NavBar from "./assets/components/NavBar";
 const API_KEY = import.meta.env.VITE_FOOD_TRUCK_MAPS_API;
 
 function App() {
-  const [foodTruckUsers, setFoodTruckUsers] = useState([]);
+  const [foodTruckUsers, setFoodTruckUsers] = useState([{ name: "Testing" }]);
   const [userView, setUserView] = useState(false);
   console.log("Current foodtrucks:", foodTruckUsers);
 

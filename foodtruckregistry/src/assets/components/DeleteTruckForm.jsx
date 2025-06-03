@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Combobox from "./Combobox";
 
 function DeleteTruckForm({ trucks, deleteTruck }) {
   //State to manage the input field of the business name to be deleted
@@ -28,12 +29,7 @@ function DeleteTruckForm({ trucks, deleteTruck }) {
 
   return (
     <form onSubmit={handleDeletion}>
-      <input
-        type="text"
-        name="name"
-        placeholder="Enter business name here"
-        onChange={handleChange}
-      />
+      <Combobox list={trucks} />
       <input type="submit" value="Delete marker" />
     </form>
   );
