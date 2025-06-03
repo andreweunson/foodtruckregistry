@@ -1,14 +1,23 @@
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import { useState } from "react";
 import AddTruckForm from "./assets/components/AddTruckForm";
-import DeleteForm from "./assets/components/DeleteFoodTruckForm";
+import DeleteTruckForm from "./assets/components/DeleteTruckForm";
 import MarkerWithInfoWindow from "./assets/components/MarkerWithInfoWindow";
 import "./App.css";
+import NavBar from "./assets/components/NavBar";
 const API_KEY = import.meta.env.VITE_FOOD_TRUCK_MAPS_API;
 
 function App() {
   const [foodTruckUsers, setFoodTruckUsers] = useState([]);
-  console.log("Current food:", foodTruckUsers);
+  const [userView, setUserView] = useState(false);
+  console.log("Current foodtrucks:", foodTruckUsers);
+
+  const toggleUserView = (event) => {
+    event.preventDefault();
+    console.log("Navbar has been clicked");
+    console.log("Userview:", userView);
+    setUserView((prev) => !prev);
+  };
 
   return (
     <>
@@ -31,9 +40,17 @@ function App() {
         >
           <MarkerWithInfoWindow points={foodTruckUsers} />
         </Map>
-        <div className="flex-container">
-          <AddTruckForm props={setFoodTruckUsers} />
-          <DeleteForm props={[foodTruckUsers, setFoodTruckUsers]} />
+        <div className="navbar">
+          <NavBar handleClick={toggleUserView} />
+          <div
+            className={`form-flex-container ${userView ? "user-view" : null}`}
+          >
+            <AddTruckForm addTruck={setFoodTruckUsers} />
+            <DeleteTruckForm
+              deleteTruck={setFoodTruckUsers}
+              trucks={foodTruckUsers}
+            />
+          </div>
         </div>
       </APIProvider>
     </>

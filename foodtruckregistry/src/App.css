@@ -6,11 +6,15 @@ body,
   width: 100%;
 }
 
-.flex-container {
+.form-flex-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 20vw;
+}
+
+.user-view {
+  display: none;
 }
 
 form {

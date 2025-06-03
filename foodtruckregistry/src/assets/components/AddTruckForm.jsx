@@ -1,8 +1,7 @@
 import { useState } from "react";
 import PlacesAutocomplete from "./PlacesAutocomplete";
 
-function AddTruckForm({ props }) {
-  const setTruckUser = props;
+function AddTruckForm({ addTruck }) {
   const [foodTruck, setFoodTruck] = useState({
     name: "",
     description: "This is a food truck!",
@@ -39,7 +38,7 @@ function AddTruckForm({ props }) {
   //truckUser array, then clears the input values for a new truck
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTruckUser((prev) => [...prev, foodTruck]);
+    addTruck((prev) => [...prev, foodTruck]);
 
     //Also clear the form input values
     setFoodTruck({

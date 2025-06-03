@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-function DeleteForm({ props }) {
-  const [truckUser, setTruckUser] = props;
+function DeleteTruckForm({ trucks, deleteTruck }) {
   //State to manage the input field of the business name to be deleted
   const [deleteInput, setDeleteInput] = useState({
     name: "",
@@ -17,12 +16,12 @@ function DeleteForm({ props }) {
 
   const handleDeletion = (e) => {
     e.preventDefault();
-    //Find truck business name in truckUser and delete it from the list
+    //Find truck business name in trucks and delete it from the list
     if (!deleteInput.name) {
       return;
     }
     console.log("Deleting marker with name:", deleteInput.name);
-    setTruckUser((prev) =>
+    deleteTruck((prev) =>
       prev.filter((truckName) => truckName.name !== deleteInput.name)
     );
   };
@@ -39,4 +38,4 @@ function DeleteForm({ props }) {
     </form>
   );
 }
-export default DeleteForm;
+export default DeleteTruckForm;
