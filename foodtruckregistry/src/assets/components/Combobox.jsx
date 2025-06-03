@@ -3,7 +3,6 @@ import { useState, useMemo } from "react";
 export default function Combobox({ list }) {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  console.log("Foodtrucks", list);
 
   const filtered = useMemo(() => {
     if (!query) return list;

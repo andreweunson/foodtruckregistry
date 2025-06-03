@@ -6,7 +6,7 @@ import {
 } from "@vis.gl/react-google-maps";
 
 //TODO: add a custom HTML element that gets displayed when the advancedmarker is clicked
-function MarkerWithInfoWindow({ points }) {
+export default function MarkerWithInfoWindow({ points }) {
   const map = useMap();
   console.log("Rendered the marker component");
   console.log("Current markers:", points);
@@ -33,4 +33,3 @@ function MarkerWithInfoWindow({ points }) {
     </>
   );
 }
-export default MarkerWithInfoWindow;

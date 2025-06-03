@@ -8,7 +8,7 @@ import NavBar from "./assets/components/NavBar";
 const API_KEY = import.meta.env.VITE_FOOD_TRUCK_MAPS_API;
 
 function App() {
-  const [foodTruckUsers, setFoodTruckUsers] = useState([{ name: "Testing" }]);
+  const [foodTruckUsers, setFoodTruckUsers] = useState([]);
   const [userView, setUserView] = useState(false);
   console.log("Current foodtrucks:", foodTruckUsers);
 
@@ -28,14 +28,14 @@ function App() {
         <Map
           defaultZoom={13}
           defaultCenter={{ lat: 47.5984, lng: 237.6501 }}
-          onCameraChanged={(ev) => {
-            console.log(
-              "Camera changed:",
-              ev.detail.center,
-              "Zoom:",
-              ev.detail.zoom
-            );
-          }}
+          // onCameraChanged={(ev) => {
+          //   console.log(
+          //     "Camera changed:",
+          //     ev.detail.center,
+          //     "Zoom:",
+          //     ev.detail.zoom
+          //   );
+          // }}
           mapId="715b5253316d4dd7"
         >
           <MarkerWithInfoWindow points={foodTruckUsers} />

@@ -18,7 +18,7 @@ function DeleteTruckForm({ trucks, deleteTruck }) {
   const handleDeletion = (e) => {
     e.preventDefault();
     //Find truck business name in trucks and delete it from the list
-    if (!deleteInput.name) {
+    if (!deleteInput.value) {
       return;
     }
     console.log("Deleting marker with name:", deleteInput.name);

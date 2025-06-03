@@ -1,26 +1,25 @@
-const BASE_URL = "https://maps.googleapis.com/maps/api/geocode/";
+// const BASE_URL = "https://maps.googleapis.com/maps/api/geocode/";
 const API_KEY = import.meta.env.VITE_FOOD_TRUCK_MAPS_API;
 
-export function getAddressLatLng(address) {
-  const getAddress = async () => {
-    const encodedURI = encodeURIComponent(address);
+export default async function getAddressLatLng(address) {
+  if (!address) return {};
+  console.log("Calling getAddressLatLng with address:", address);
 
-    const response = await fetch(
-      `${BASE_URL}/json?${encodedURI}&key=${API_KEY}`
-    );
-    const addressLatLng = await response.json();
-    // console.log(
-    //   "Address of:",
-    //   address,
-    //   "Location:",
-    //   addressLatLng.geometry.location
-    // );
-    return {
-      address: "test address",
-      location: {
-        lat: -1,
-        lng: -1,
-      },
-    };
+  const encodedURI = encodeURIComponent(address);
+  const response = await fetch(
+    `geocode/json?address=${encodedURI}&key=${API_KEY}`
+  );
+  const resultJSON = await response.json();
+  if (resultJSON.results == undefined) {
+    console.error("Invalid results");
+    return {};
+  }
+  let results = resultJSON.results;
+  console.log(results);
+  let location = results[0].geometry.location;
+  let retObj = {
+    address: `${results[0].formatted_address}`,
+    location: { location },
   };
+  return retObj;
 }

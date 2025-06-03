@@ -1,7 +1,7 @@
 import { useActionState, useEffect, useState } from "react";
 import getPlacesSuggestion from "../services/PlacesAutocomplete";
 
-export default function PlacesAutocomplete() {
+export default function PlacesAutocomplete({ setTruckLoc }) {
   /**
    * General idea:
    * 1. have a textbox that will serve as the input for the placesautocomplete
@@ -50,11 +50,19 @@ export default function PlacesAutocomplete() {
       ...prev,
       string: event.target.value,
     }));
+    setTruckLoc((prev) => ({
+      ...prev,
+      place: event.target.value,
+    }));
   };
 
   const handleSelect = (place) => {
     console.log("User clicked:", place);
     setChoiceMade(true);
+    setTruckLoc((prev) => ({
+      ...prev,
+      place: place,
+    }));
     setIncompletePlace((prev) => ({
       ...prev,
       string: place,
@@ -67,8 +75,10 @@ export default function PlacesAutocomplete() {
       <input
         onChange={handleAutocompleteChange}
         onFocus={() => {
+          console.log("Choice made false");
           setChoiceMade(false);
         }}
+        onBlur={(e) => handleSelect(e.target.value)}
         value={incompletePlace.string}
         placeholder="Search Location"
       />

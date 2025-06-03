@@ -7,7 +7,7 @@ const API_KEY = import.meta.env.VITE_FOOD_TRUCK_MAPS_API;
 
 export default async function getPlacesSuggestion(stringInput) {
   console.log("Calling getPlacesSuggestions with input:", stringInput);
-  const response = await fetch("/api", {
+  const response = await fetch("/place", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
