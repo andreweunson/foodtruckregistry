@@ -19,16 +19,31 @@ export default function PlacesAutocomplete() {
   const [incompletePlace, setIncompletePlace] = useState({
     string: "",
   });
+  const [isOpen, setIsOpen] = useState(false);
+  const [choiceMade, setChoiceMade] = useState(false);
 
   //Watch the incompletePlace for state changes, when that happens we need to call the service
   //to get new suggestions
   useEffect(() => {
-    if (!incompletePlace) return;
-    getPlacesSuggestion(incompletePlace.string).then((suggestions) =>
-      setPlaceAutocomplete(suggestions)
-    );
-    console.log("Autocomplete:", placeAutocomplete);
+    if (!incompletePlace.string) {
+      console.log("Empty string, returning");
+      return;
+    }
+    if (choiceMade) {
+      console.log("Choice selected, no more suggestions needed");
+      return;
+    }
+    getPlacesSuggestion(incompletePlace.string).then((suggestions) => {
+      setPlaceAutocomplete(suggestions);
+    });
   }, [incompletePlace]);
+
+  useEffect(() => {
+    //Watch placeAutocomplete and setIsOpen depending on the state
+    console.log("Places suggestions:", placeAutocomplete);
+    if (!placeAutocomplete) setIsOpen(false);
+    setIsOpen(true);
+  }, [placeAutocomplete]);
 
   const handleAutocompleteChange = (event) => {
     setIncompletePlace((prev) => ({
@@ -37,13 +52,40 @@ export default function PlacesAutocomplete() {
     }));
   };
 
+  const handleSelect = (place) => {
+    console.log("User clicked:", place);
+    setChoiceMade(true);
+    setIncompletePlace((prev) => ({
+      ...prev,
+      string: place,
+    }));
+    setTimeout(() => setIsOpen(false), 200);
+  };
+
   return (
     <>
       <input
         onChange={handleAutocompleteChange}
+        onFocus={() => {
+          setChoiceMade(false);
+        }}
         value={incompletePlace.string}
         placeholder="Search Location"
       />
+
+      {isOpen && placeAutocomplete.length > 0 && (
+        <ul>
+          {placeAutocomplete.map((place) => (
+            <li
+              key={place}
+              onClick={() => handleSelect(place)}
+              onMouseDown={(e) => e.preventDefault()}
+            >
+              {place}
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }

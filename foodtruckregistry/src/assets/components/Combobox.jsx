@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 
-function Combobox({ list }) {
+export default function Combobox({ list }) {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   console.log("Foodtrucks", list);
@@ -53,5 +53,3 @@ function Combobox({ list }) {
     </div>
   );
 }
-
-export default Combobox;

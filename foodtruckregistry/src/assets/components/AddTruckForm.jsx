@@ -38,17 +38,18 @@ function AddTruckForm({ addTruck }) {
   //truckUser array, then clears the input values for a new truck
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTruck((prev) => [...prev, foodTruck]);
+    console.log("Submitting foodtruck", foodTruck);
+    // addTruck((prev) => [...prev, foodTruck]);
 
-    //Also clear the form input values
-    setFoodTruck({
-      name: "",
-      description: "This is a food truck!",
-      location: {
-        lat: "",
-        lng: "",
-      },
-    });
+    // //Also clear the form input values
+    // setFoodTruck({
+    //   name: "",
+    //   description: "This is a food truck!",
+    //   location: {
+    //     lat: "",
+    //     lng: "",
+    //   },
+    // });
   };
 
   return (
