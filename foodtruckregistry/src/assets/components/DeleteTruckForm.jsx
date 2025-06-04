@@ -37,7 +37,8 @@ function DeleteTruckForm({ trucks, deleteTruck }) {
         query={truckToDelete}
         setQuery={setTruckToDelete}
         list={trucks}
-        handleDelete={setDeleteInput}
+        handleSelect={setDeleteInput}
+        placeholderText={"Enter foodtruck name..."}
       />
       <input type="submit" value="Delete marker" />
     </form>

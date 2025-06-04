@@ -1,8 +1,17 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 
-export default function Combobox({ query, setQuery, list, handleDelete }) {
+export default function Combobox({
+  query,
+  setQuery,
+  list,
+  handleSelect,
+  placeholderText,
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    handleSelect(query);
+  }, [query]);
   const filtered = useMemo(() => {
     if (!query) return list;
     const lower = query.toLowerCase();
@@ -11,9 +20,8 @@ export default function Combobox({ query, setQuery, list, handleDelete }) {
     );
   }, [query, list]);
 
-  const handleSelect = (item) => {
+  const handleClickOnListItem = (item) => {
     console.log("User clicked:", item.name);
-    handleDelete(item.name);
     setQuery(item.name);
     setIsOpen(false);
   };
@@ -23,7 +31,7 @@ export default function Combobox({ query, setQuery, list, handleDelete }) {
       <input
         text="text"
         value={query}
-        placeholder="Enter Foodtruck..."
+        placeholder={placeholderText}
         onChange={(event) => {
           setQuery(event.target.value);
           setIsOpen(true);
@@ -33,7 +41,7 @@ export default function Combobox({ query, setQuery, list, handleDelete }) {
         }}
         onBlur={(e) => {
           setTimeout(() => setIsOpen(false), 100);
-          handleDelete(e.target.value);
+          handleSelect(e.target.value);
         }}
       />
 
@@ -42,7 +50,7 @@ export default function Combobox({ query, setQuery, list, handleDelete }) {
           {filtered.map((item) => (
             <li
               key={item.name}
-              onClick={() => handleSelect(item)}
+              onClick={() => handleClickOnListItem(item)}
               onMouseDown={(event) => event.preventDefault()}
             >
               {item.name}

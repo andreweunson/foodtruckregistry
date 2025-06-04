@@ -17,6 +17,13 @@ body,
   display: none;
 }
 
+.searchbar {
+  display: flex;
+  position: absolute;
+  top: 20px;
+  right: 20%;
+}
+
 form {
   display: flex;
   flex-direction: column;
