@@ -1,7 +1,6 @@
 import { useState, useMemo } from "react";
 
-export default function Combobox({ list }) {
-  const [query, setQuery] = useState("");
+export default function Combobox({ query, setQuery, list, handleDelete }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const filtered = useMemo(() => {
@@ -14,6 +13,7 @@ export default function Combobox({ list }) {
 
   const handleSelect = (item) => {
     console.log("User clicked:", item.name);
+    handleDelete(item.name);
     setQuery(item.name);
     setIsOpen(false);
   };
@@ -31,8 +31,9 @@ export default function Combobox({ list }) {
         onFocus={() => {
           setIsOpen(true);
         }}
-        onBlur={() => {
+        onBlur={(e) => {
           setTimeout(() => setIsOpen(false), 100);
+          handleDelete(e.target.value);
         }}
       />
 
@@ -40,7 +41,7 @@ export default function Combobox({ list }) {
         <ul>
           {filtered.map((item) => (
             <li
-              key={item}
+              key={item.name}
               onClick={() => handleSelect(item)}
               onMouseDown={(event) => event.preventDefault()}
             >

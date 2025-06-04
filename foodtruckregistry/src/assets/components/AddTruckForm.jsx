@@ -7,6 +7,9 @@ function AddTruckForm({ addTruck }) {
     name: "",
     place: "",
   });
+  const [incompletePlace, setIncompletePlace] = useState({
+    string: "",
+  });
 
   //Updates the state of the food truck name
   const handleChange = (e) => {
@@ -15,6 +18,8 @@ function AddTruckForm({ addTruck }) {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const clearInput = () => {};
 
   //When the form is submitted, takes the foodTruck object and stores it into the
   //truckUser array, then clears the input values for a new truck
@@ -43,6 +48,10 @@ function AddTruckForm({ addTruck }) {
         name: "",
         place: "",
       });
+
+      setIncompletePlace({
+        string: "",
+      });
     } catch (error) {
       console.error("Error occurred:", error);
     } finally {
@@ -60,7 +69,11 @@ function AddTruckForm({ addTruck }) {
         placeholder="Enter your business's name"
         onChange={handleChange}
       />
-      <PlacesAutocomplete setTruckLoc={setFoodTruck} />
+      <PlacesAutocomplete
+        queryValue={incompletePlace}
+        setQueryValue={setIncompletePlace}
+        setTruckLoc={setFoodTruck}
+      />
       <input type="submit" value="Submit Location" />
     </form>
   );

@@ -1,7 +1,11 @@
-import { useActionState, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import getPlacesSuggestion from "../services/PlacesAutocomplete";
 
-export default function PlacesAutocomplete({ setTruckLoc }) {
+export default function PlacesAutocomplete({
+  setTruckLoc,
+  setQueryValue,
+  queryValue,
+}) {
   /**
    * General idea:
    * 1. have a textbox that will serve as the input for the placesautocomplete
@@ -16,16 +20,13 @@ export default function PlacesAutocomplete({ setTruckLoc }) {
 
   //Store state of autocompletion
   const [placeAutocomplete, setPlaceAutocomplete] = useState({});
-  const [incompletePlace, setIncompletePlace] = useState({
-    string: "",
-  });
   const [isOpen, setIsOpen] = useState(false);
   const [choiceMade, setChoiceMade] = useState(false);
 
   //Watch the incompletePlace for state changes, when that happens we need to call the service
   //to get new suggestions
   useEffect(() => {
-    if (!incompletePlace.string) {
+    if (!queryValue.string) {
       console.log("Empty string, returning");
       return;
     }
@@ -33,10 +34,10 @@ export default function PlacesAutocomplete({ setTruckLoc }) {
       console.log("Choice selected, no more suggestions needed");
       return;
     }
-    getPlacesSuggestion(incompletePlace.string).then((suggestions) => {
+    getPlacesSuggestion(queryValue.string).then((suggestions) => {
       setPlaceAutocomplete(suggestions);
     });
-  }, [incompletePlace]);
+  }, [queryValue]);
 
   useEffect(() => {
     //Watch placeAutocomplete and setIsOpen depending on the state
@@ -46,7 +47,7 @@ export default function PlacesAutocomplete({ setTruckLoc }) {
   }, [placeAutocomplete]);
 
   const handleAutocompleteChange = (event) => {
-    setIncompletePlace((prev) => ({
+    setQueryValue((prev) => ({
       ...prev,
       string: event.target.value,
     }));
@@ -63,7 +64,7 @@ export default function PlacesAutocomplete({ setTruckLoc }) {
       ...prev,
       place: place,
     }));
-    setIncompletePlace((prev) => ({
+    setQueryValue((prev) => ({
       ...prev,
       string: place,
     }));
@@ -79,7 +80,7 @@ export default function PlacesAutocomplete({ setTruckLoc }) {
           setChoiceMade(false);
         }}
         onBlur={(e) => handleSelect(e.target.value)}
-        value={incompletePlace.string}
+        value={queryValue.string}
         placeholder="Search Location"
       />
 
