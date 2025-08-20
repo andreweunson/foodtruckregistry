@@ -11,6 +11,7 @@ function AddTruckForm({ addTruck }) {
     string: "",
   });
 
+  //Test message to test the commit
   //Updates the state of the food truck name
   const handleChange = (e) => {
     setFoodTruck((prev) => ({
